@@ -22,41 +22,38 @@ import React, { useState, useEffect } from 'react'
   let itemlist=items.map((item, index)=> {
 
     return(
-    <div className='box'>
-      <div key={index} >{item}</div>
-      <button value="削除"
-        onClick={(e) => {
-          removeItem(index);
-
-          // console.log(items);
-          // console.log('index',index);
-          // console.log('itemsを変更');　
-        }}
-         
-      />
-    </div>
+      
+      <div className='box'>
+      <input className="checkbox" type="checkbox"/>
+        <div className='todo' key={index} >{item}</div>
+        <button 
+          onClick={(e) => {removeItem(index);}}   
+        >削除</button>
+        
+      </div>
+    
   )});
-  // const [add, setAdd]=React.useState([]);
+
   return (
     <div className="App">
-      
+      <h1>To Do List</h1>
+      <div className='search-container' >
       {/* stateの更新 */}
-      <input value={name} onChange={handleChange } 
-      // console
-       />
-      <button value="追加" onClick={() => {
+      <input value={name} onChange={handleChange } />
+      <button onClick={() => {
         if (name=='' ) return; //空文字入力阻止
         items.push(name);
         setName('');
-        console.log("add item"+items);
+        console.log(items);
       }
-      } />
+      } >追加</button>
           {/*  配列型じゃないとconcatできない */}
-        
+      </div> 
+      <div className='small-container'>
       
         {/* stateの読み出し */}
         {itemlist}
-      
+      </div>
       {/* <button value="更新"/> */}
     </div>
   );

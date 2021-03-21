@@ -1,33 +1,63 @@
 .App {
-  text-align: center;
-  border:1px solid black ;
+  
+  /* border:1px solid black ; */
   /* display: flex; */
-  justify-content: center;
+  /* justify-content: center; */
+  text-align: center;
+}
+
+.search-container{
+  /* border:1px solid black ; */
+  position: relative;
+  margin-bottom: 50px;
+  
+}
+
+.small-container{
+  /* text-align: center; */
+  /* align-items: center; */
+  /* border:1px solid black ; */
+  /* display: ; */
+  /* text-align: center; */
+  /* margin-left:700px; */
+  
+  margin: 0 auto;
+  display: flex;
+  flex-flow:column;
+  width:500px;
 }
 
 .box {
-  border:1px solid black ;
-}
-
-.small-container button{
-  
-}
-.do{
-  display:flex;
-  /* padding: 0 auto; */
-  border:1px solid black ;
-  /* position: relative; */
+  /* border:1px solid black ; */
+  /* align-items: center; */
+  /* width:auto ; */
   /* margin:0 auto; */
-  /* text-align: center; */
+  /* padding: 0px 0px; */
+  display: inline-block;
+  /* justify-content:center; */
 
-}
-.wrap{
-  /* display:flex; */
-  /* justify-content: center; */
-  border:1px solid black ;
-  margin:0 auto;
-  
 }
 .checkbox{
-  float: left;
+  float:left;
 }
+.todo{
+  /* border:1px solid black ; */
+  float: left;
+  padding: 0 5px;
+}
+
+.box button{
+  /* display:flex; */
+  float: right;
+  /* padding:10px */
+  /* font-size: 3px; */
+  
+}
+.box input{
+
+}
+
+
+
+
+
