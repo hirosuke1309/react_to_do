@@ -44,6 +44,7 @@
   /* border:1px solid black ; */
   float: left;
   padding: 0 5px;
+  /* text-decoration: line-through; */
 }
 
 .box button{
@@ -57,6 +58,9 @@
 
 }
 
+.hello{
+  text-decoration: line-through; 
+}
 
 
 

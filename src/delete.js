@@ -1,17 +1,16 @@
 
 import './App.css';
-import React, { useState, useEffect ,useReducer} from 'react'
+import React, { useState, useEffect,useReducer } from 'react'
 
 const App_Key='AppKey'
 
  function App() {
   // stateの設定 左:取得　右:設定
   const [name, setName] = useState('');
-  const [items, setItems]= useState([]);
+  const [items, setItems]= useState(["facebook","twitter","line"]);
   const [checked, setChecked] = useState(false);
 
   const handleChange = e => setName(e.target.value);
-
   const removeItem = (index) => {
     let newItems = items.slice()
     newItems.splice(index,1)
@@ -19,58 +18,51 @@ const App_Key='AppKey'
     setItems(newItems)
   };
 
+  // ローカルStorageをリロードされた際に取得
+  const appState = localStorage.getItem(App_Key);
+  // ?は中身がある時実行する
+  const initialState = appState ? JSON.parse(appState) : {
+    items: []
+  }
+  const [items, dispatch] = useReducer(reducer, initialState)
 
-    const click = (index) =>{
-
+  useEffect(() => {
+    localStorage.setItem(App_Key, JSON.stringify(items))
+  }, [items])
+  // const click = () =>{
+    // var elem = document.getElementById("todo");
     
+    const click = (index) =>{
+      
+      
       var elem = document.getElementById('todo'+index);
       if (document.getElementById('check'+index).checked) {
         // チェックボックスがONのときの処理
-        // elem.style.color = 'green' ;
+        // キャメルケース
         elem.style.textDecoration = 'line-through';
-        // console.log(elem.style)
-        elem.style.fontSize = "80%";
-      } else {
-        // チェックボックスがOFFのときの処理
-        // console.log(elem.style.text_decoration)
-        elem.style.textDecoration = 'none';
-        // console.log('false')
-        elem.style.fontSize = "100%";
+          // console.log(elem.style)
+          elem.style.fontSize = "80%";
+        } else {
+          // チェックボックスがOFFのときの処理
+          elem.style.textDecoration = 'none';
+          elem.style.fontSize = "100%";
+        }
       }
-    }
-  
-
-
-  // // ローカルStorageをリロードされた際に取得
-  // const appState = localStorage.getItem(App_Key);
-  // // ?は中身がある時実行する
-  // const initialState = appState ? JSON.parse(appState) : {
-  //   items: []
-  // }
-  // setItems({items})
-  // const [items, dispatch] = useReducer(reducer, initialState)
-  
-
-  // useEffect(() => {
-  //   localStorage.setItem(App_Key, JSON.stringify(items))
-  // },[items])
-
-
-  
-
-
-  let itemlist=items.map((item, index)=> {
-
-    return(
+      // }, false);
       
-      <div className='box'>
+      
+      
+      
+      let itemlist=items.map((item, index)=> {
+        
+        return(
+          
+          <div className='box'>
       <input className="checkbox" type="checkbox" onChange={(e)=>{click(index)}}  id = {'check'+index} />
 
         <div className='todo' key={index} id={'todo'+index} >{item}</div>
         <button 
-          onClick={
-            (e) => {removeItem(index); }
-          }   
+          onClick={(e) => {removeItem(index);}}   
         >削除</button>
         
       </div>
@@ -106,9 +98,3 @@ const App_Key='AppKey'
 }
 
 
-
-
-
-
-
-export default App;
