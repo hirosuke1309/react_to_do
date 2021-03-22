@@ -1,6 +1,7 @@
 
 import './App.css';
 import React, { useState, useEffect ,useReducer} from 'react'
+// import useLocalStorage from '../hooks/useLocalStorage';
 
 const App_Key='AppKey'
 
@@ -8,7 +9,6 @@ const App_Key='AppKey'
   // stateの設定 左:取得　右:設定
   const [name, setName] = useState('');
   const [items, setItems]= useState([]);
-  const [checked, setChecked] = useState(false);
 
   const handleChange = e => setName(e.target.value);
 
