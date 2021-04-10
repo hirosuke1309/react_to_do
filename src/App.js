@@ -3,17 +3,6 @@ import './App.css';
 import React, { useState, useEffect ,useReducer} from 'react'
 
 
-// function useLocalState (key, value){
-//   const [loc, setLoc] = useState(value);
-
-//   function setState(value){
-//     localStorage.setItem(key, value);
-//     setLoc(value);
-//   }
-
-//   return [loc, setState];
-// }
-
 
 function App() {
   // localStorage.clear()
@@ -21,10 +10,23 @@ function App() {
   
   const localStorageKey = "appkey"
   const [name, setName] = useState('');
- 
   const [items,setItems]=useState( localStorage.getItem(localStorageKey) == null ? [] : localStorage.getItem(localStorageKey).split(','));
   // console.log( localStorage.getItem(localStorageKey).split(','))
   const handleChange = e => setName(e.target.value);
+  const handleKeyClick = e =>{
+    if (e.keyCode === 13) {
+      if (name=='' ) return; //空文字入力阻止
+      items.unshift(name)// 先頭に追加
+      localStorage.setItem(localStorageKey,items)
+      setName('');
+    }
+  }
+  const handleClick = () =>{
+    if (name=='' ) return; //空文字入力阻止
+      items.unshift(name)// 先頭に追加
+      localStorage.setItem(localStorageKey,items)
+      setName('');
+  }
 
   const removeItem = (index) => {
     let newItems = items.slice()
@@ -55,8 +57,6 @@ function App() {
   
 
 
- 
-
     let itemlist=
       items.map((item, index)=> {
         return(
@@ -85,38 +85,12 @@ function App() {
     <div className="App">
       <h1>To Do List</h1>
       <div className='search-container' >
-      {/* stateの更新 */}
-      <input value={name} onChange={handleChange } 
-        onKeyDown={e =>{
-          if (e.keyCode === 13) {
-            if (name=='' ) return; //空文字入力阻止
-        // 先頭に追加
-
-            items.unshift(name)
-            localStorage.setItem(localStorageKey,items)
-            setName('');
-            
-          }
-        }}
-      />
-      <button onClick={() => {
-        if (name=='' ) return; //空文字入力阻止
-        // 先頭に追加
-
-        items.unshift(name)
-        localStorage.setItem(localStorageKey,items)
-
-        setName('');
-        
-
-      }
-      } >追加</button>
-          {/*  配列型じゃないとconcatできない */}
+        <input value={name} onChange={handleChange } 
+          onKeyDown={handleKeyClick}/>
+        <button onClick={handleClick} >追加</button>
       </div> 
       <div className='small-container'>
-      
-        {/* stateの読み出し */}
-        {itemlist } 
+        {itemlist} 
       </div>
       {/* <button value="更新"/> */}
     </div>
